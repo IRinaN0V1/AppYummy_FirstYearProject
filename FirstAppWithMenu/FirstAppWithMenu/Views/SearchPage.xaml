@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FirstAppWithMenu.Views.SearchPage">
+    <Grid BackgroundColor="#F9F9F9" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Padding="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Frame BackgroundColor="#F9F9F9" HasShadow="True" Margin="0,20" Padding="0" HeightRequest="40" HorizontalOptions="FillAndExpand">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Image HeightRequest="20" WidthRequest="20" Margin="0,20" Source="https://github.com/devcrux/Animation-In-Xamarin-forms/blob/master/PropertyApp/PropertyApp.Android/Resources/drawable/search.png?raw=true"/>
+                <Entry Grid.Column="1" Placeholder="Search" TextColor="Black" FontSize="15" FontFamily="ThemeFontRegular" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
+            </Grid>
+        </Frame>
+    </Grid>
+</ContentPage>

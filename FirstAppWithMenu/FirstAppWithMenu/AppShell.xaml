@@ -5,12 +5,6 @@
        Title="FirstAppWithMenu"
        x:Class="FirstAppWithMenu.AppShell">
 
-    <!--
-        The overall app visual hierarchy is defined here, along with navigation.
-    
-        https://docs.microsoft.com/xamarin/xamarin-forms/app-fundamentals/shell/
-    -->
-
     <Shell.Resources>
         <ResourceDictionary>
             <Style x:Key="BaseStyle" TargetType="Element">
@@ -31,18 +25,13 @@
 
     <TabBar>
         <ShellContent Title="Главная" Icon="https://cdn-icons-png.freepik.com/512/69/69524.png?ga=GA1.1.450074160.1714574090" Route="AboutPage" ContentTemplate="{DataTemplate local:AboutPage}" />
-        <ShellContent Title="Категории" Icon="https://cdn-icons-png.freepik.com/512/308/308556.png?ga=GA1.1.450074160.1714574090" ContentTemplate="{DataTemplate local:Categories}" />
+        <ShellContent Title="Категории" Icon="https://cdn-icons-png.freepik.com/512/308/308556.png?ga=GA1.1.450074160.1714574090" ContentTemplate="{DataTemplate local:CategoriesButtonPage}" />
         <ShellContent Title="Покупки" Icon="https://cdn-icons-png.freepik.com/512/2194/2194047.png?ga=GA1.1.450074160.1714574090" ContentTemplate="{DataTemplate local:Purchases}" />
         <ShellContent Title="Избранное" Icon="https://cdn-icons-png.freepik.com/512/4434/4434031.png?ga=GA1.1.450074160.1714574090" ContentTemplate="{DataTemplate local:Favorite}" />
     </TabBar>
 
-    <!--
-        If you would like to navigate to this content you can do so by calling
-        await Shell.Current.GoToAsync("//LoginPage");
-    -->
-    <TabBar>
-        <ShellContent Route="LoginPage" ContentTemplate="{DataTemplate local:LoginPage}" />
-    </TabBar>
+    
+   
 
 
 </Shell>

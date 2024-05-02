@@ -10,9 +10,9 @@ using Xamarin.Forms.Xaml;
 namespace FirstAppWithMenu.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class Categories : ContentPage
+    public partial class SearchPage : ContentPage
     {
-        public Categories()
+        public SearchPage()
         {
             InitializeComponent();
         }

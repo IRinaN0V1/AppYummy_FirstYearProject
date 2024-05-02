@@ -11,5 +11,7 @@ namespace FirstAppWithMenu.Views
         {
             InitializeComponent();
         }
+
+        
     }
 }

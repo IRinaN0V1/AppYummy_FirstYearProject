@@ -3,23 +3,31 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="FirstAppWithMenu.Views.AboutPage"
              xmlns:vm="clr-namespace:FirstAppWithMenu.ViewModels"
-             Title="{Binding Title}">
+             Title="Главная">
     
+    <!--название страницы - "Главная"-->
     <ContentPage.BindingContext>
         <vm:AboutViewModel />
     </ContentPage.BindingContext>
 
+    <!--Кнопки поиска и контекстного меню в верхнем меню-->
     <ContentPage.ToolbarItems>
-        <ToolbarItem IconImageSource="https://cdn-icons-png.freepik.com/512/7263/7263379.png?ga=GA1.1.450074160.1714574090" />
+        <ToolbarItem IconImageSource="https://cdn-icons-png.freepik.com/512/7263/7263379.png?ga=GA1.1.450074160.1714574090" Order="Primary" 
+                     Command="{Binding OpenSearchCommand}" />
+        <ToolbarItem Text="Search" IconImageSource="https://cdn-icons-png.freepik.com/512/1160/1160356.png?ga=GA1.1.450074160.1714574090" Order="Primary" 
+             Command="{Binding OpenSettingsCommand}" />
     </ContentPage.ToolbarItems>
 
-    <ContentPage.Resources>
+    
+
+    <!--<ContentPage.Resources>
         <ResourceDictionary>
             <Color x:Key="Accent">Pink</Color>
         </ResourceDictionary>
-    </ContentPage.Resources>
+    </ContentPage.Resources>-->
 
-    <Grid>
+    
+    <!--<Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
@@ -51,6 +59,6 @@
                         TextColor="White" />
             </StackLayout>
         </ScrollView>
-    </Grid>
+    </Grid>-->
 
 </ContentPage>
