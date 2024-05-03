@@ -24,7 +24,7 @@
     </Shell.Resources>
 
     <TabBar>
-        <ShellContent Title="Главная" Icon="https://cdn-icons-png.freepik.com/512/69/69524.png?ga=GA1.1.450074160.1714574090" Route="AboutPage" ContentTemplate="{DataTemplate local:AboutPage}" />
+        <ShellContent Title="Главная" Icon="https://cdn-icons-png.freepik.com/512/69/69524.png?ga=GA1.1.450074160.1714574090" Route="MainPage" ContentTemplate="{DataTemplate local:MainPage}" />
         <ShellContent Title="Категории" Icon="https://cdn-icons-png.freepik.com/512/308/308556.png?ga=GA1.1.450074160.1714574090" ContentTemplate="{DataTemplate local:CategoriesButtonPage}" />
         <ShellContent Title="Покупки" Icon="https://cdn-icons-png.freepik.com/512/2194/2194047.png?ga=GA1.1.450074160.1714574090" ContentTemplate="{DataTemplate local:Purchases}" />
         <ShellContent Title="Избранное" Icon="https://cdn-icons-png.freepik.com/512/4434/4434031.png?ga=GA1.1.450074160.1714574090" ContentTemplate="{DataTemplate local:Favorite}" />
