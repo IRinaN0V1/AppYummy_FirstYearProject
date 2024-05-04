@@ -26,6 +26,7 @@
                         <ViewCell.View>
                             <StackLayout Orientation="Horizontal">
                                 <Label Text="{Binding Name}" FontSize="Medium" />
+                                <Label Text="{Binding Recip}" FontSize="Medium" />
                             </StackLayout>
                         </ViewCell.View>
                     </ViewCell>
