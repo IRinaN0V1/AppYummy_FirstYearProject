@@ -3,10 +3,20 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="FirstAppWithMenu.Views.Favorite">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+        <StackLayout Padding ="60" Background="White">
+            <Image Source="https://static.vecteezy.com/system/resources/previews/001/189/051/original/star-png.png"
+            VerticalOptions="Start"
+            HorizontalOptions="Center"
+            WidthRequest="100"
+            HeightRequest="100" />
+
+            <Label Text="Упс!" 
+               HorizontalOptions="Center" FontSize="15" TextColor="Black"/>
+
+            <Label Text="Список понравившихся рецептов" 
+               HorizontalOptions="Center" FontSize="15" TextColor="Black"/>
+            <Label Text="пуст!" 
+                HorizontalOptions="Center" FontSize="15" TextColor="Black"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

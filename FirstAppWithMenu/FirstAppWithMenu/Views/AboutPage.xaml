@@ -18,7 +18,22 @@
              Command="{Binding OpenSettingsCommand}" />
     </ContentPage.ToolbarItems>
 
-    
+    <StackLayout>
+        <ListView x:Name="friendsList" ItemsSource="{Binding}" ItemSelected="OnItemSelected">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <ViewCell.View>
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text="{Binding Name}" FontSize="Medium" />
+                            </StackLayout>
+                        </ViewCell.View>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <Button Text="Добавить" Clicked="CreateFriend" />
+    </StackLayout>
 
     <!--<ContentPage.Resources>
         <ResourceDictionary>
