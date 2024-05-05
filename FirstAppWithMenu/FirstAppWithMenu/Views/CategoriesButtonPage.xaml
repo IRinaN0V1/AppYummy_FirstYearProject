@@ -6,29 +6,48 @@
              Title="Категории">
 
     <!--название страницы - "Главная"-->
-    <ContentPage.BindingContext>
-        <vm:AboutViewModel />
-    </ContentPage.BindingContext>
+<ContentPage.BindingContext>
+    <vm:AboutViewModel />
+</ContentPage.BindingContext>
 
-    <!--Кнопки поиска и контекстного меню в верхнем меню-->
-    <ContentPage.ToolbarItems>
-        <ToolbarItem IconImageSource="https://cdn-icons-png.freepik.com/512/7263/7263379.png?ga=GA1.1.450074160.1714574090" Order="Primary" 
-                 Command="{Binding OpenSearchCommand}" />
-        <ToolbarItem Text="Search" IconImageSource="https://cdn-icons-png.freepik.com/512/1160/1160356.png?ga=GA1.1.450074160.1714574090" Order="Primary" 
-         Command="{Binding OpenSettingsCommand}" />
-    </ContentPage.ToolbarItems>
+<!--Кнопки поиска и контекстного меню в верхнем меню-->
+<ContentPage.ToolbarItems>
+    <ToolbarItem IconImageSource="https://cdn-icons-png.freepik.com/512/7263/7263379.png?ga=GA1.1.450074160.1714574090" Order="Primary" 
+             Command="{Binding OpenSearchCommand}" />
+    <ToolbarItem Text="Search" IconImageSource="https://cdn-icons-png.freepik.com/512/1160/1160356.png?ga=GA1.1.450074160.1714574090" Order="Primary" 
+     Command="{Binding OpenSettingsCommand}" />
+</ContentPage.ToolbarItems>
 
-    <ContentPage.Content>
-        <ScrollView>
+<ContentPage.Content>
+    <ScrollView>
+        <StackLayout Padding="20,35,20,10" Spacing="20">
 
-            <StackLayout x:Name="buttonStack" Padding="20,35,20,10">
+            <!-- Добавляем надпись перед кнопками -->
+            <Label Text="Выберите одну из предложенных категорий" FontSize="Large" TextColor="#333333" HorizontalOptions="Center" />
 
-                <Button x:Name="BreakfastButton" Text="Прием пищи" FontSize="Large" TextColor="#F9F9F9" HeightRequest="300" WidthRequest="600" CornerRadius="20" Command="{Binding OpenTypeOfMealCategoryCommand}"/>
-                <BoxView WidthRequest="20" HeightRequest="10" BackgroundColor="Transparent" />
-                <Button x:Name="LunchButton"  Text="Тип блюда" FontSize="Large" TextColor="#F9F9F9" HeightRequest="300" WidthRequest="1000" CornerRadius="20" Command="{Binding OpenTypeOfDishCategoryCommand}"/>
+            <!-- Изменяем стили кнопок -->
+            <Button x:Name="BreakfastButton" Text="Прием пищи" FontSize="Large" TextColor="#F9F9F9" HeightRequest="200" CornerRadius="80" FontAttributes="Bold">
+                <Button.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                        <GradientStop Color="#FFD700" Offset="0.0"/>
+                        <GradientStop Color="#FFA500" Offset="1.0"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
 
-            </StackLayout>
+            <!-- Добавляем небольшой отступ между надписью и кнопками -->
+            <BoxView HeightRequest="17" BackgroundColor="Transparent" />
 
-        </ScrollView>
-    </ContentPage.Content>
+            <Button x:Name="LunchButton"  Text="Тип блюда" FontSize="Large" TextColor="#F9F9F9" HeightRequest="200" CornerRadius="80" FontAttributes="Bold">
+                <Button.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                        <GradientStop Color="#FFD700" Offset="0.0"/>
+                        <GradientStop Color="#FFA500" Offset="1.0"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
+
+        </StackLayout>
+    </ScrollView>
+</ContentPage.Content>
 </ContentPage>
