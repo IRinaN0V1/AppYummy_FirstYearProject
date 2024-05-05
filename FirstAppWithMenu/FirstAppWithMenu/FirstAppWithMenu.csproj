@@ -7,7 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Данные.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
     <EmbeddedResource Include="database.db" />
+    <EmbeddedResource Include="Данные.txt" />
   </ItemGroup>
 
   <ItemGroup>
