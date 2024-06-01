@@ -19,10 +19,10 @@ namespace FirstAppWithMenu
 
                 if (DatabaseWithRecipes == null)
                 {
-                    // путь, по которому будет находиться база данных
+                    // путь, по которому будет находиться таблица
                     string dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), DATABASE_NAME);
 
-                    // если база данных не существует (еще не скопирована)
+                    // если таблица не существует (еще не скопирована)
                     if (!File.Exists(dbPath))
                     {
                         // получаем текущую сборку
