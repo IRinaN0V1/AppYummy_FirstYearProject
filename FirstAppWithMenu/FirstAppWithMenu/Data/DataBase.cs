@@ -12,14 +12,14 @@ using System.Reflection;
 
 namespace FirstAppWithMenu.Data
 {
-    public class DataBase //класс для работы с базой данных рецептов
+    public class DataBase //класс для работы со структурой данных рецептов
     {
-        SQLiteAsyncConnection DatabaseWithRecipes; //поле для асинхронного соединения с базой данных SQLite 
+        SQLiteAsyncConnection DatabaseWithRecipes; //поле для асинхронного соединения с таблицей SQLite 
 
-        public DataBase(string databasePath) //конструктор класса DataBase, иницициализирует соединение с БД и создает таблицу
+        public DataBase(string databasePath) //конструктор класса DataBase, иницициализирует соединение с файлом и создает таблицу
         {
             DatabaseWithRecipes = new SQLiteAsyncConnection(databasePath);
-            FillDataBase(); //вызов методя для заполнения БД из текстового файла
+            FillDataBase(); //вызов методя для заполнения таблицы из текстового файла
         }
 
         public string[] OpenTxtFile() //метод для подключение к текстовому файлу с рецептами и его чтение
