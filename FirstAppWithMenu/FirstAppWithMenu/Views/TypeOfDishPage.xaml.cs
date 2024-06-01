@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+using FirstAppWithMenu.Models;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -12,55 +9,84 @@ namespace FirstAppWithMenu.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class TypeOfDishPage : ContentPage
     {
+        // Конструктор класса TypeOfDishPage
         public TypeOfDishPage()
         {
             InitializeComponent();
-
-            var layout = new StackLayout
-            {
-                Orientation = StackOrientation.Vertical, // Устанавливаем ориентацию на вертикальную
-                VerticalOptions = LayoutOptions.FillAndExpand // Размеры будут занимать все доступное место по вертикали
-            };
-
-            // Создаем список текста перед скроллом, цвета кнопок и список названий кнопок для каждого скролла
-            var scrollItems = new List<(string labelText, Color buttonColor, List<string> buttonNames)>
-            {
-                ("Горячее", Color.Wheat, new List<string> {"мясо по французски", "спагетти", "плов", "котлеты", "каша"}),
-                ("Десерты", Color.LightCyan, new List<string> {"Чизкейк", "панна котта", "Тирамису", "эклер", "Наполеон"}),
-                ("Салаты", Color.PowderBlue, new List<string> {"цезарь", "оливье", "греческий", "Мимоза", "винегрет"}),
-                ("Супы", Color.MistyRose, new List<string> {"щи", "солянка", "рассольник", "борщ", "сырный", "суп-пюре"}),
-                ("Выпечка", Color.Lavender, new List<string> {"шарлотка", "рыбный пирог", "кулич", "сахарная плюшка", "манник"})
-            };
-
-            // Создаем ScrollView для каждого элемента в списке
-            foreach (var item in scrollItems)
-            {
-                layout.Children.Add(CreateButtonRow(item.labelText, item.buttonColor, item.buttonNames));
-            }
-
-            Content = layout;
+            Title = "Тип блюда"; // Устанавливаем заголовок страницы
+            GetItems(); // Вызываем метод для отображения элементов
         }
 
-        // Метод для создания горизонтального ScrollView с одной строкой кнопок и текстовой меткой
-        private StackLayout CreateButtonRow(string labelText, Color buttonColor, List<string> buttonNames)
+        // Асинхронный метод для получения и отображения элементов на странице
+        protected async void GetItems()
         {
+            // Создаем вертикальный макет для размещения элементов
+            var layout = new StackLayout
+            {
+                Orientation = StackOrientation.Vertical,
+                VerticalOptions = LayoutOptions.FillAndExpand
+            };
+
+            // Создаем прокручиваемую область
+            var scroll = new ScrollView
+            {
+                Content = layout,
+                Orientation = ScrollOrientation.Vertical
+            };
+
+            // Список с информацией о типах блюд и их рецептах
+            var scrollItems = new List<(string labelText, Color buttonColor, List<Recipe> recipes)>
+            {
+                // Перечисляем различные типы блюд и получаем соответствующие рецепты из базы данных
+                ("  Горячее", Color.Wheat, await App.Database.GetItemsByTypeOfDishAsync("Горячее")),
+                ("  Десерты", Color.LightCyan, await App.Database.GetItemsByTypeOfDishAsync("Десерт")),
+                ("  Салаты", Color.PowderBlue, await App.Database.GetItemsByTypeOfDishAsync("Салат")),
+                ("  Супы", Color.MistyRose, await App.Database.GetItemsByTypeOfDishAsync("Суп")),
+                ("  Выпечка", Color.Lavender, await App.Database.GetItemsByTypeOfDishAsync("Выпечка")),
+                ("  Гарнир", Color.PapayaWhip, await App.Database.GetItemsByTypeOfDishAsync("Гарнир")),
+                ("  Жаркое", Color.Wheat, await App.Database.GetItemsByTypeOfDishAsync("Жаркое")),
+                ("  Закуска", Color.PowderBlue, await App.Database.GetItemsByTypeOfDishAsync("Закуска")),
+                ("  Каша", Color.MistyRose, await App.Database.GetItemsByTypeOfDishAsync("Каша")),
+                ("  Мясное блюдо", Color.Lavender, await App.Database.GetItemsByTypeOfDishAsync("Мясное блюдо")),
+                ("  Напиток", Color.PapayaWhip, await App.Database.GetItemsByTypeOfDishAsync("Напиток")),
+                ("  Соус", Color.LightCyan, await App.Database.GetItemsByTypeOfDishAsync("Соус")),
+                ("  Хлеб", Color.PowderBlue, await App.Database.GetItemsByTypeOfDishAsync("Хлеб"))
+            };
+
+            // Для каждого элемента списка создаем кнопки с рецептами и добавляем их на страницу
+            foreach (var item in scrollItems)
+            {
+                layout.Children.Add(CreateButtonRow(item.labelText, item.buttonColor, item.recipes));
+            }
+
+            Content = scroll;
+        }
+
+
+        // Метод для создания строки с кнопками для определенного типа блюд
+        private StackLayout CreateButtonRow(string labelText, Color buttonColor, List<Recipe> buttonNames)
+        {
+            // Создаем вертикальный макет
             var stackLayout = new StackLayout
             {
                 Orientation = StackOrientation.Vertical,
-                HorizontalOptions = LayoutOptions.FillAndExpand // Размеры будут занимать все доступное место по горизонтали
+                HorizontalOptions = LayoutOptions.FillAndExpand
             };
 
+            // Создаем метку с текстом типа блюда
             var label = new Label
             {
                 Text = labelText,
-                FontSize = Device.GetNamedSize(NamedSize.Large, typeof(Label)), // Увеличиваем размер текста
-                HorizontalOptions = LayoutOptions.Start, // Размещаем метку слева
-                Margin = new Thickness(5, 0, 0, 5), // Добавляем отступы слева и снизу
+                FontSize = Device.GetNamedSize(NamedSize.Large, typeof(Label)),
+                HorizontalOptions = LayoutOptions.Start,
+                FontAttributes = FontAttributes.Bold,
+                Margin = new Thickness(5, 0, 0, 0),
                 TextColor = Color.Black
             };
 
-            stackLayout.Children.Add(label);
+            stackLayout.Children.Add(label); // Добавляем метку в вертикальный макет
 
+            // Создаем горизонтальную прокручиваемую область для кнопок
             var scrollView = new ScrollView
             {
                 Orientation = ScrollOrientation.Horizontal,
@@ -68,34 +94,59 @@ namespace FirstAppWithMenu.Views
                 VerticalScrollBarVisibility = ScrollBarVisibility.Never
             };
 
+            // Создаем горизонтальный макет для кнопок
             var buttonsStackLayout = new StackLayout
             {
                 Orientation = StackOrientation.Horizontal
             };
 
-            // Создаем кнопки на основе переданных названий
-            foreach (var buttonName in buttonNames)
+            // Для каждого рецепта создаем кнопку, устанавливаем ее параметры и добавляем обработчик для нажатия
+            foreach (Recipe item in buttonNames)
             {
-                var button = new Button
+                var button = new Xamarin.Forms.Button
                 {
-                    Text = buttonName.Trim(), // Устанавливаем текст кнопки
-                    FontSize = Device.GetNamedSize(NamedSize.Large, typeof(Button)), // Увеличиваем размер кнопки
-                    Margin = new Thickness(10), // Увеличиваем отступы вокруг кнопок
-                    WidthRequest = 160, // Устанавливаем фиксированную ширину кнопок
-                    HeightRequest = 100, // Устанавливаем фиксированную высоту кнопок
-                    BackgroundColor = buttonColor, // Устанавливаем цвет кнопок
-                    CornerRadius = 10, // Скругляем углы кнопок
+                    // Устанавливаем параметры кнопки: текст, цвет фона, размер, обработчик нажатия и т.д.
+                    Text = item.Name.Trim(),
+                    FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(Xamarin.Forms.Button)),
+                    Margin = new Thickness(10),
+                    HeightRequest = 118,
+                    BackgroundColor = buttonColor,
+                    CornerRadius = 10,
                     TextColor = Color.Black
                 };
 
-                buttonsStackLayout.Children.Add(button);
+                button.Clicked += async (sender, e) =>
+                {
+                    List<Recipe> recipes = await App.FavDatabase.GetItemsAsync();
+
+                    bool isExist = recipes.Any(r => r.Name == item.Name);
+
+                    Page recipePage;
+
+                    if (!isExist)
+                    {
+                        // Создаем новую страницу рецепта с кнопкой "Добавить в избранное"
+                        recipePage = new PageOfRecipe();
+                    }
+                    else
+                    {
+                        // Создаем новую страницу рецепта с кнопкой "Удалить из избранного"
+                        recipePage = new DeleteFromFavPage();
+                    }
+
+                    recipePage.BindingContext = item; // Привязываем выбранный рецепт к контексту страницы
+                    await Navigation.PushAsync(recipePage); // Переходим на страницу с деталями рецепта
+
+                };
+
+                buttonsStackLayout.Children.Add(button); // Добавляем кнопку в горизонтальный макет
             }
+            scrollView.Content = buttonsStackLayout; // Устанавливаем кнопки в прокручиваемую область
 
-            scrollView.Content = buttonsStackLayout;
+            stackLayout.Children.Add(scrollView); // Добавляем прокручиваемую область в вертикальный макет
 
-            stackLayout.Children.Add(scrollView);
-
-            return stackLayout;
+            return stackLayout; // Возвращаем сформированный макет
         }
     }
 }
+

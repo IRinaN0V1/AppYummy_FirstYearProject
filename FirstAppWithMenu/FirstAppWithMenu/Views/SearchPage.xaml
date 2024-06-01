@@ -1,21 +1,40 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="FirstAppWithMenu.Views.SearchPage">
-    <Grid BackgroundColor="#F9F9F9" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Padding="20">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <Frame BackgroundColor="#F9F9F9" HasShadow="True" Margin="0,20" Padding="0" HeightRequest="40" HorizontalOptions="FillAndExpand">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                </Grid.ColumnDefinitions>
-                <Image HeightRequest="20" WidthRequest="20" Margin="0,20" Source="https://github.com/devcrux/Animation-In-Xamarin-forms/blob/master/PropertyApp/PropertyApp.Android/Resources/drawable/search.png?raw=true"/>
-                <Entry Grid.Column="1" Placeholder="Search" TextColor="Black" FontSize="15" FontFamily="ThemeFontRegular" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
-            </Grid>
-        </Frame>
-    </Grid>
+             x:Class="FirstAppWithMenu.Views.SearchPage"
+             Title="Поиск">
+    <ContentPage.Content>
+        <!-- Основной контент страницы -->
+        <StackLayout>
+            <!-- Поле поиска -->
+            <SearchBar x:Name="SearchBar" 
+                   Placeholder="Введите название блюда..." 
+                   PlaceholderColor="Gray" 
+                   CancelButtonColor="Gray" 
+                   HorizontalTextAlignment="Center" 
+                   TextChanged="SearchBar_TextChanged" 
+                   Keyboard="Chat" />
+
+            <!-- Кнопка "Фильтры" -->
+            <Button Text="Фильтры" Clicked="FiltersButton_Clicked" />
+
+            <!-- Список для отображения элементов -->
+            <ListView x:Name="recipesList" ItemsSource="{Binding}" ItemSelected="OnItemSelected">
+                <!-- Определение шаблона отображения каждого элемента списка -->
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <!-- Отображение каждого элемента в виде горизонтального стека -->
+                            <ViewCell.View>
+                                <StackLayout Orientation="Horizontal">
+                                    <!-- Метка для отображения названия блюда -->
+                                    <Label Text="{Binding Name}" FontSize="Medium" />
+                                </StackLayout>
+                            </ViewCell.View>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
 </ContentPage>

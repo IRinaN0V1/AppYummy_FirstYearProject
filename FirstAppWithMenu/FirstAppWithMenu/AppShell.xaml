@@ -2,8 +2,13 @@
 <Shell xmlns="http://xamarin.com/schemas/2014/forms" 
        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
        xmlns:local="clr-namespace:FirstAppWithMenu.Views"
+       xmlns:vm="clr-namespace:FirstAppWithMenu.ViewModels"
        Title="FirstAppWithMenu"
        x:Class="FirstAppWithMenu.AppShell">
+
+    <Shell.BindingContext>
+        <vm:AboutViewModel />
+    </Shell.BindingContext>
 
     <Shell.Resources>
         <ResourceDictionary>
@@ -22,16 +27,11 @@
             <Style TargetType="FlyoutItem" BasedOn="{StaticResource BaseStyle}" />
         </ResourceDictionary>
     </Shell.Resources>
-
     <TabBar>
-        <ShellContent Title="Главная" Icon="https://cdn-icons-png.freepik.com/512/69/69524.png?ga=GA1.1.450074160.1714574090" Route="AboutPage" ContentTemplate="{DataTemplate local:AboutPage}" />
-        <ShellContent Title="Категории" Icon="https://cdn-icons-png.freepik.com/512/308/308556.png?ga=GA1.1.450074160.1714574090" ContentTemplate="{DataTemplate local:CategoriesButtonPage}" />
-        <ShellContent Title="Покупки" Icon="https://cdn-icons-png.freepik.com/512/2194/2194047.png?ga=GA1.1.450074160.1714574090" ContentTemplate="{DataTemplate local:Purchases}" />
-        <ShellContent Title="Избранное" Icon="https://cdn-icons-png.freepik.com/512/4434/4434031.png?ga=GA1.1.450074160.1714574090" ContentTemplate="{DataTemplate local:Favorite}" />
+        <ShellContent Title="Главная"  Icon="icon_mainpage.png" Route="AboutPage" ContentTemplate="{DataTemplate local:AboutPage}" />
+        <ShellContent Title="Категории" Icon="icon_catagoriespage.png" ContentTemplate="{DataTemplate local:CategoriesButtonPage}" />
+        <ShellContent Title="Избранное" Icon="icon_favoritepage.png" ContentTemplate="{DataTemplate local:Favorite}" />
     </TabBar>
-
     
-   
-
-
 </Shell>
+ 

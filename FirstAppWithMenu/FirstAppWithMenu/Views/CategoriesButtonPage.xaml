@@ -5,30 +5,58 @@
              xmlns:vm="clr-namespace:FirstAppWithMenu.ViewModels"
              Title="Категории">
 
-    <!--название страницы - "Главная"-->
-    <ContentPage.BindingContext>
+    <!--Установка объекта типа AboutViewModel как контекст данных для главной страницы-->
+    <!--<ContentPage.BindingContext>
         <vm:AboutViewModel />
-    </ContentPage.BindingContext>
+    </ContentPage.BindingContext>-->
 
-    <!--Кнопки поиска и контекстного меню в верхнем меню-->
+
+    <!--Меню с элементами управления, расположенное в верхней части экрана приложения-->
+    <!--Меню содержит кнопки для страниц "Поиск" и "Настройки"-->
     <ContentPage.ToolbarItems>
-        <ToolbarItem IconImageSource="https://cdn-icons-png.freepik.com/512/7263/7263379.png?ga=GA1.1.450074160.1714574090" Order="Primary" 
+
+        <ToolbarItem IconImageSource="icon_searchpage.png"
+                 Order="Primary" 
                  Command="{Binding OpenSearchCommand}" />
-        <ToolbarItem Text="Search" IconImageSource="https://cdn-icons-png.freepik.com/512/1160/1160356.png?ga=GA1.1.450074160.1714574090" Order="Primary" 
-         Command="{Binding OpenSettingsCommand}" />
+
+        <ToolbarItem IconImageSource="icon_settings.png"
+                 Order="Primary" 
+                 Command="{Binding OpenSettingsCommand}" />
+
     </ContentPage.ToolbarItems>
 
     <ContentPage.Content>
         <ScrollView>
+            <StackLayout Padding="20,35,20,10" Spacing="20">
 
-            <StackLayout x:Name="buttonStack" Padding="20,35,20,10">
+                <!-- Создание текстового заголовка перед кнопками -->
+                <Label Text="Выберите одну из предложенных категорий" FontSize="Large" TextColor="#333333" HorizontalOptions="Center" />
 
-                <Button x:Name="BreakfastButton" Text="Прием пищи" FontSize="Large" TextColor="#F9F9F9" HeightRequest="300" WidthRequest="600" CornerRadius="20" Command="{Binding OpenTypeOfMealCategoryCommand}"/>
-                <BoxView WidthRequest="20" HeightRequest="10" BackgroundColor="Transparent" />
-                <Button x:Name="LunchButton"  Text="Тип блюда" FontSize="Large" TextColor="#F9F9F9" HeightRequest="300" WidthRequest="1000" CornerRadius="20" Command="{Binding OpenTypeOfDishCategoryCommand}"/>
+                <!-- Установка стилей кнопок -->
+                <Button x:Name="BreakfastButton" Text="Тип приема пищи" FontSize="Large" TextColor="#F9F9F9" HeightRequest="200" CornerRadius="80" FontAttributes="Bold" Command="{Binding OpenTypeOfMealCategoryCommand}">
+                    <Button.Background>
+                        <!-- Создание градиентного фона для кнопки -->
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                            <GradientStop Color="#FFD700" Offset="0.0"/>
+                            <GradientStop Color="#FFA500" Offset="1.0"/>
+                        </LinearGradientBrush>
+                    </Button.Background>
+                </Button>
+
+                <!-- Добавление отступа между надписью и кнопками -->
+                <BoxView HeightRequest="17" BackgroundColor="Transparent" />
+
+                <Button x:Name="LunchButton"  Text="Тип блюда" FontSize="Large" TextColor="#F9F9F9" HeightRequest="200" CornerRadius="80" FontAttributes="Bold" Command="{Binding OpenTypeOfDishCategoryCommand}">
+                    <Button.Background>
+                        <!-- Создание градиентного фона для кнопки -->
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                            <GradientStop Color="#FFD700" Offset="0.0"/>
+                            <GradientStop Color="#FFA500" Offset="1.0"/>
+                        </LinearGradientBrush>
+                    </Button.Background>
+                </Button>
 
             </StackLayout>
-
         </ScrollView>
     </ContentPage.Content>
 </ContentPage>

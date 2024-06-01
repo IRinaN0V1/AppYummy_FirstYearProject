@@ -4,6 +4,9 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using FirstAppWithMenu.Data;
 using FirstAppWithMenu.Models;
+using System.Collections.Generic;
+using System.Linq;
+using System.Windows.Input;
 
 namespace FirstAppWithMenu.Views
 {
@@ -11,160 +14,124 @@ namespace FirstAppWithMenu.Views
     {
         public AboutPage()
         {
+            // Инициализация компонентов страницы
             InitializeComponent();
-            AddPopularItems();
+            // Добавление категорий  на главную страницу
+            AddCategoriesButtons();
+            //// Получение случайных элементов и добавление их на страницу
+            GetItemsRandom();
         }
 
-        private void AddPopularItems()
+        private void AddCategoriesButtons()
         {
-            // Создание вертикального StackLayout для всех элементов
-            var mainStackLayout = new StackLayout();
+            List<string> categories = new List<string> { "Завтрак", "Обед", "Ужин", "Перекус", "Закуска" };
 
-            // Надпись "Что в меню на сегодня?"
-            var titleLabel = new Label
+            foreach (string category in categories)
             {
-                Text = "Что в меню на сегодня?",
-                HorizontalOptions = LayoutOptions.CenterAndExpand,
-                Margin = new Thickness(0, 20),
-                FontAttributes = FontAttributes.Bold,
-                TextColor = Color.Black,
-                FontSize = 25 // Установка большого размера шрифта
-            };
-            mainStackLayout.Children.Add(titleLabel);
-
-            // Кнопки с типами блюд
-            var categoriesStackLayout = new StackLayout
-            {
-                Orientation = StackOrientation.Horizontal,
-                HorizontalOptions = LayoutOptions.CenterAndExpand
-            };
-            var categories = new string[] { "Завтраки", "Обеды", "Ужины", "Перекусы" };
-            foreach (var category in categories)
-            {
-                var categoryButton = new Button
+                Button button = new Button
                 {
                     Text = category,
                     Margin = new Thickness(4),
                     WidthRequest = 90,
                     HeightRequest = 115,
-                    BackgroundColor = Color.LightSalmon, // Цвет кнопки
-                    Background = new LinearGradientBrush
-                    {
-                        GradientStops = new GradientStopCollection
-                {
-                    new GradientStop(Color.LightSalmon, 0), // Начальный цвет градиента
-                    new GradientStop(Color.Moccasin, 1) // Конечный цвет градиента
-                },
-                        StartPoint = new Point(0, 0), // Начальная точка градиента
-                        EndPoint = new Point(1, 0) // Конечная точка градиента
-                    },
+                    BackgroundColor = Color.LightSalmon,
                     TextColor = Color.Black,
                     FontSize = 12
                 };
 
-                // Обработчик события нажатия на кнопку
-                categoryButton.Clicked += async (sender, e) =>
-                {
-                    // Выполнение навигации на страницу TypeOfMealPage
-                    await Navigation.PushAsync(new TypeOfMealPage());
-                };
+                // Привязка данных к кнопке
+                button.BindingContext = category;
 
-                categoriesStackLayout.Children.Add(categoryButton);
+                button.Clicked += CategoryButton_Clicked;
+
+                categoriesStackLayout.Children.Add(button);
             }
-            mainStackLayout.Children.Add(categoriesStackLayout);
+        }
 
-            // Надпись "Популярное"
-            var popularLabel = new Label
-            {
-                Text = "Популярное",
-                HorizontalOptions = LayoutOptions.CenterAndExpand,
-                Margin = new Thickness(0, 20),
-                FontAttributes = FontAttributes.Bold,
-                TextColor = Color.Black,
-                FontSize = 25
-            };
-            mainStackLayout.Children.Add(popularLabel);
+        private async void CategoryButton_Clicked(object sender, EventArgs e)
+        {
+            Button button = (Button)sender;
+            string category = (string)button.BindingContext;
+            // Выполнение перехода на страницу SelectedCategoryPage
+            await Navigation.PushAsync(new SelectedCategoryPage(category));
+        }
 
-            // Создание горизонтального ScrollView
-            var scrollView = new ScrollView
-            {
-                Orientation = ScrollOrientation.Horizontal,
-                HorizontalScrollBarVisibility = ScrollBarVisibility.Never
-            };
+        protected async void GetItemsRandom()
+        {
+            // Получение списка рецептов из базы данных асинхронно
+            List<Recipe> items = await App.Database.GetItemsAsync();
 
-            // Создание вертикального StackLayout для кнопок и соответствующих надписей
-            var stackLayout = new StackLayout
-            {
-                Orientation = StackOrientation.Horizontal
-            };
+            // Перемешивание списка рецептов в случайном порядке
+            var random = new Random();
+            var shuffledItems = items.OrderBy(x => random.Next()).ToList();
 
-            // Создание кнопок с названиями блюд и изображениями
-            var dishes = new string[] { "   Сочный греческий салат с фетой", "    Том Ям", "    Профитроли шоколадные" };
-            var dishImages = new string[] { "https://i.pinimg.com/564x/5a/ad/eb/5aadeb455c881635ff711a13f96e0d29.jpg", "https://i.pinimg.com/564x/db/5f/cc/db5fcc45298662d8bc3d934d92015dd6.jpg", "https://i.pinimg.com/736x/57/5f/e2/575fe20e686a4720c93877e761cfb72b.jpg" };
-            for (int i = 0; i < dishes.Length; i++)
+            List<Recipe> randomRecipes = shuffledItems.Take(3).ToList();
+            foreach (Recipe item in randomRecipes)
             {
-                var buttonStackLayout = new StackLayout
+                // Создание горизонтального стека для каждой пары картинка-текст
+                var recipeStackLayout = new StackLayout
                 {
                     Orientation = StackOrientation.Vertical,
-                    HorizontalOptions = LayoutOptions.Center
+                    HorizontalOptions = LayoutOptions.CenterAndExpand,
+                    VerticalOptions = LayoutOptions.CenterAndExpand
                 };
 
+                // Создание кнопки-картинки для перехода на страницу рецепта
                 var button = new ImageButton
                 {
-                    Margin = new Thickness(10, 0),
-                    VerticalOptions = LayoutOptions.CenterAndExpand,
-                    WidthRequest = 350,
-                    HeightRequest = 350, // Устанавливаем фиксированную высоту кнопок
-                    Source = dishImages[i],
-                    BackgroundColor = Color.Transparent // Прозрачный фон кнопки
+                    Margin = new Thickness(10, 0),                              // Установка внешних отступов
+                    VerticalOptions = LayoutOptions.CenterAndExpand,            // Установка выравнивания заголовка по вертикали
+                    WidthRequest = 350,                                         // Установка ширины картинки
+                    HeightRequest = 350,                                        // Установка высоты картинки
+                    Source = item.Image,                                        // Установка изображения
+                    BackgroundColor = Color.Transparent                         // Установка прозрачного фона
                 };
 
+                //Название рецепта
                 var dishLabel = new Label
                 {
-                    Text = dishes[i],
-                    HorizontalOptions = LayoutOptions.Start,
-                    Margin = new Thickness(0, 5),
-                    TextColor = Color.Black,
-                    FontSize = 17
+                    Text = item.Name,                                           // Установка названия рецепта
+                    HorizontalOptions = LayoutOptions.Start,                    // Выравнивание по левому краю контейнера
+                    Margin = new Thickness(0, 5),                               // Установка внешних отступов
+                    TextColor = Color.Black,                                    // Установка цвета текста
+                    FontSize = 17                                               // Установка размера шрифта
                 };
 
-                buttonStackLayout.Children.Add(button);
-                buttonStackLayout.Children.Add(dishLabel);
+                // Привязка данных к кнопке
+                button.BindingContext = item;
 
-                stackLayout.Children.Add(buttonStackLayout);
+                // Обработчик события нажатия на ImageButton для открытия страницы рецепта
+                button.Clicked += async (sender, e) =>
+                {
+                    List<Recipe> recipes = await App.FavDatabase.GetItemsAsync();
+
+                    bool isExist = recipes.Any(r => r.Name == item.Name);
+
+                    Page recipePage;
+
+                    if (!isExist)
+                    {
+                        // Создаем новую страницу рецепта с кнопкой "Добавить в избранное"
+                        recipePage = new PageOfRecipe();
+                    }
+                    else
+                    {
+                        // Создаем новую страницу рецепта с кнопкой "Удалить из избранного"
+                        recipePage = new DeleteFromFavPage();
+                    }
+
+                    recipePage.BindingContext = item;
+                    await Navigation.PushAsync(recipePage);
+
+                };
+
+                recipeStackLayout.Children.Add(button);
+                recipeStackLayout.Children.Add(dishLabel);
+
+                // Добавление горизонтального стека в основной стек
+                recommendationStackLayout.Children.Add(recipeStackLayout);
             }
-
-            scrollView.Content = stackLayout;
-            mainStackLayout.Children.Add(scrollView);
-
-            // Добавление всех элементов в Content
-            Content = mainStackLayout;
         }
-
-
-        protected override async void OnAppearing()
-        {
-            // привязка данных
-            friendsList.ItemsSource = await App.Database.GetItemsAsync();
-
-            base.OnAppearing();
-        }
-        // обработка нажатия элемента в списке
-        private async void OnItemSelected(object sender, SelectedItemChangedEventArgs e)
-        {
-            Recipe selectedFriend = (Recipe)e.SelectedItem;
-            Breakfast friendPage = new Breakfast();
-            friendPage.BindingContext = selectedFriend;
-            await Navigation.PushAsync(friendPage);
-        }
-        // обработка нажатия кнопки добавления
-        private async void CreateFriend(object sender, EventArgs e)
-        {
-            Recipe friend = new Recipe();
-            Breakfast friendPage = new Breakfast();
-            friendPage.BindingContext = friend;
-            await Navigation.PushAsync(friendPage);
-        }
-
     }
 }
+

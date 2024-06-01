@@ -34,6 +34,10 @@
     <WarningLevel>4</WarningLevel>
     <AndroidLinkMode>None</AndroidLinkMode>
     <EmbedAssembliesIntoApk>false</EmbedAssembliesIntoApk>
+    <AotAssemblies>false</AotAssemblies>
+    <EnableLLVM>false</EnableLLVM>
+    <AndroidEnableProfiledAot>false</AndroidEnableProfiledAot>
+    <BundleAssemblies>false</BundleAssemblies>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -44,6 +48,11 @@
     <WarningLevel>4</WarningLevel>
     <AndroidManagedSymbols>true</AndroidManagedSymbols>
     <EmbedAssembliesIntoApk>true</EmbedAssembliesIntoApk>
+    <AotAssemblies>false</AotAssemblies>
+    <EnableLLVM>false</EnableLLVM>
+    <AndroidEnableProfiledAot>false</AndroidEnableProfiledAot>
+    <BundleAssemblies>false</BundleAssemblies>
+    <AndroidLinkMode>None</AndroidLinkMode>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Mono.Android" />
@@ -71,27 +80,145 @@
   <ItemGroup>
     <AndroidResource Include="Resources\values\styles.xml" />
     <AndroidResource Include="Resources\values\colors.xml" />
-    <AndroidResource Include="Resources\mipmap-anydpi-v26\icon.xml" />
-    <AndroidResource Include="Resources\mipmap-anydpi-v26\icon_round.xml" />
-    <AndroidResource Include="Resources\mipmap-hdpi\icon.png" />
-    <AndroidResource Include="Resources\mipmap-hdpi\launcher_foreground.png" />
     <AndroidResource Include="Resources\mipmap-mdpi\icon.png" />
-    <AndroidResource Include="Resources\mipmap-mdpi\launcher_foreground.png" />
-    <AndroidResource Include="Resources\mipmap-xhdpi\icon.png" />
-    <AndroidResource Include="Resources\mipmap-xhdpi\launcher_foreground.png" />
-    <AndroidResource Include="Resources\mipmap-xxhdpi\icon.png" />
-    <AndroidResource Include="Resources\mipmap-xxhdpi\launcher_foreground.png" />
-    <AndroidResource Include="Resources\mipmap-xxxhdpi\icon.png" />
-    <AndroidResource Include="Resources\mipmap-xxxhdpi\launcher_foreground.png" />
-    <AndroidResource Include="Resources\drawable\xamarin_logo.png" />
-    <AndroidResource Include="Resources\drawable\icon_about.png" />
-    <AndroidResource Include="Resources\drawable\icon_feed.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FirstAppWithMenu\FirstAppWithMenu.csproj">
       <Project>{1CB70A67-6919-4571-B234-3511FCC5100B}</Project>
       <Name>FirstAppWithMenu</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\BiskKrevIShenx.png" />
+    <AndroidResource Include="Resources\drawable\FranzuzSavaren.png" />
+    <AndroidResource Include="Resources\drawable\GrechkaMorkov.png" />
+    <AndroidResource Include="Resources\drawable\IspZakuzTapas.png" />
+    <AndroidResource Include="Resources\drawable\KapustOvoshi.png" />
+    <AndroidResource Include="Resources\drawable\KompIzShipsApple.png" />
+    <AndroidResource Include="Resources\drawable\KompIzSux.png" />
+    <AndroidResource Include="Resources\drawable\KoreanDip.png" />
+    <AndroidResource Include="Resources\drawable\KurBuluon.png" />
+    <AndroidResource Include="Resources\drawable\KurGulash.png" />
+    <AndroidResource Include="Resources\drawable\OladIzZelLuka.png" />
+    <AndroidResource Include="Resources\drawable\OladSChoko.png" />
+    <AndroidResource Include="Resources\drawable\SomZapechKart.png" />
+    <AndroidResource Include="Resources\drawable\SoupIzKrabov.png" />
+    <AndroidResource Include="Resources\drawable\SoupPureBrokkoli.png" />
+    <AndroidResource Include="Resources\drawable\SousBeshamel.png" />
+    <AndroidResource Include="Resources\drawable\StakeWithOvoshi.png" />
+    <AndroidResource Include="Resources\drawable\VegSousBoloneze.png" />
+    <AndroidResource Include="Resources\drawable\XrustRuletBaklazh.png" />
+    <AndroidResource Include="Resources\drawable\ZapechKorneplod.png" />
+    <AndroidResource Include="Resources\drawable\ZarkoeTushKart.png" />
+    <AndroidResource Include="Resources\drawable\ZrazPechen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\ajxo.png" />
+    <AndroidResource Include="Resources\drawable\anyzm.png" />
+    <AndroidResource Include="Resources\drawable\aqkz.png" />
+    <AndroidResource Include="Resources\drawable\avuum.png" />
+    <AndroidResource Include="Resources\drawable\bconf.png" />
+    <AndroidResource Include="Resources\drawable\bpfil.png" />
+    <AndroidResource Include="Resources\drawable\cf5jm.png" />
+    <AndroidResource Include="Resources\drawable\cfkb.png" />
+    <AndroidResource Include="Resources\drawable\chsj.png" />
+    <AndroidResource Include="Resources\drawable\cpvkb.png" />
+    <AndroidResource Include="Resources\drawable\csia.png" />
+    <AndroidResource Include="Resources\drawable\cxqt.png" />
+    <AndroidResource Include="Resources\drawable\eezlr.png" />
+    <AndroidResource Include="Resources\drawable\eilwv.png" />
+    <AndroidResource Include="Resources\drawable\exid.png" />
+    <AndroidResource Include="Resources\drawable\fhstp.png" />
+    <AndroidResource Include="Resources\drawable\fsjs.png" />
+    <AndroidResource Include="Resources\drawable\fvxo.png" />
+    <AndroidResource Include="Resources\drawable\ghpa.png" />
+    <AndroidResource Include="Resources\drawable\ghyrq.png" />
+    <AndroidResource Include="Resources\drawable\gpoe.png" />
+    <AndroidResource Include="Resources\drawable\grvpc.png" />
+    <AndroidResource Include="Resources\drawable\gzsv.png" />
+    <AndroidResource Include="Resources\drawable\habsd.png" />
+    <AndroidResource Include="Resources\drawable\hgyh.png" />
+    <AndroidResource Include="Resources\drawable\hjk.png" />
+    <AndroidResource Include="Resources\drawable\hut.png" />
+    <AndroidResource Include="Resources\drawable\hyapi.png" />
+    <AndroidResource Include="Resources\drawable\hyjmd.png" />
+    <AndroidResource Include="Resources\drawable\igee.png" />
+    <AndroidResource Include="Resources\drawable\ishfu.png" />
+    <AndroidResource Include="Resources\drawable\jcwc.png" />
+    <AndroidResource Include="Resources\drawable\jdbq.png" />
+    <AndroidResource Include="Resources\drawable\jysKk.png" />
+    <AndroidResource Include="Resources\drawable\kbfeq.png" />
+    <AndroidResource Include="Resources\drawable\knssu.png" />
+    <AndroidResource Include="Resources\drawable\kpiqc.png" />
+    <AndroidResource Include="Resources\drawable\kpmw.png" />
+    <AndroidResource Include="Resources\drawable\kthsz.png" />
+    <AndroidResource Include="Resources\drawable\kvbrv.png" />
+    <AndroidResource Include="Resources\drawable\lwcxy.png" />
+    <AndroidResource Include="Resources\drawable\mot.png" />
+    <AndroidResource Include="Resources\drawable\nbxp.png" />
+    <AndroidResource Include="Resources\drawable\nfew.png" />
+    <AndroidResource Include="Resources\drawable\nkhrm.png" />
+    <AndroidResource Include="Resources\drawable\o.png" />
+    <AndroidResource Include="Resources\drawable\optey.png" />
+    <AndroidResource Include="Resources\drawable\pdka.png" />
+    <AndroidResource Include="Resources\drawable\pducd.png" />
+    <AndroidResource Include="Resources\drawable\ppph.png" />
+    <AndroidResource Include="Resources\drawable\psta.png" />
+    <AndroidResource Include="Resources\drawable\qujt.png" />
+    <AndroidResource Include="Resources\drawable\qxy.png" />
+    <AndroidResource Include="Resources\drawable\qztra.png" />
+    <AndroidResource Include="Resources\drawable\rdev.png" />
+    <AndroidResource Include="Resources\drawable\rdsqu.png" />
+    <AndroidResource Include="Resources\drawable\rfwas.png" />
+    <AndroidResource Include="Resources\drawable\rtjz.png" />
+    <AndroidResource Include="Resources\drawable\sbev.png" />
+    <AndroidResource Include="Resources\drawable\sdkpc.png" />
+    <AndroidResource Include="Resources\drawable\shuno.png" />
+    <AndroidResource Include="Resources\drawable\srnp.png" />
+    <AndroidResource Include="Resources\drawable\suwp.png" />
+    <AndroidResource Include="Resources\drawable\swxrv.png" />
+    <AndroidResource Include="Resources\drawable\taa.png" />
+    <AndroidResource Include="Resources\drawable\tkpd.png" />
+    <AndroidResource Include="Resources\drawable\tmkx.png" />
+    <AndroidResource Include="Resources\drawable\tndnt.png" />
+    <AndroidResource Include="Resources\drawable\uozfn.png" />
+    <AndroidResource Include="Resources\drawable\vcwj.png" />
+    <AndroidResource Include="Resources\drawable\wjb.png" />
+    <AndroidResource Include="Resources\drawable\xdtyq.png" />
+    <AndroidResource Include="Resources\drawable\xsbgr.png" />
+    <AndroidResource Include="Resources\drawable\xybd.png" />
+    <AndroidResource Include="Resources\drawable\yttcej_.png" />
+    <AndroidResource Include="Resources\drawable\yxdu.png" />
+    <AndroidResource Include="Resources\drawable\yzsjs.png" />
+    <AndroidResource Include="Resources\drawable\zmyv.png" />
+    <AndroidResource Include="Resources\drawable\ztbbt.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\asxvvt.png" />
+    <AndroidResource Include="Resources\drawable\icon_catagoriespage.png" />
+    <AndroidResource Include="Resources\drawable\icon_favoritepage.png" />
+    <AndroidResource Include="Resources\drawable\icon_mainpage.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\icon_settings.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\fasol.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\ramen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\icon_searchpage.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\mipmap-hdpi\icon.png" />
+    <AndroidResource Include="Resources\mipmap-xhdpi\icon.png" />
+    <AndroidResource Include="Resources\mipmap-xxhdpi\icon.png" />
+    <AndroidResource Include="Resources\mipmap-xxxhdpi\icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resources\mipmap-anydpi-v26\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <ProjectExtensions>

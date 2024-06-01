@@ -6,15 +6,16 @@ using SQLite;
 
 namespace FirstAppWithMenu.Models
 {
-    public class Recipe
+    public class Recipe //класс для работы с базой данных рецептов
     {
         [PrimaryKey, AutoIncrement]
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public string Image { get; set; }
-        public string Ingredients { get; set; }
-        public string Recip { get; set; }
-        public string TypeOfMeal { get; set; }
-        public string TypeOfDish { get; set; }
+        public int Id { get; set; } //id рецепта
+        public string Name { get; set; } //название рецепта
+        public string Image { get; set; } //изображение
+        public string ListOfIngredients { get; set; } //список ингредиентов для поиска
+        public string Ingredients { get; set; } //список ингредиентов для печати на странице рецепта
+        public string Text_Of_Recipe { get; set; } //текст рецепта
+        public string TypeOfMeal { get; set; } //тип приема пищи
+        public string TypeOfDish { get; set; } //тип блюда
     }
 }

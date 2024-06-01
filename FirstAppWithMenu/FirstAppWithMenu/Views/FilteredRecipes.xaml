@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FirstAppWithMenu.Views.FilteredRecipes"
+             Title="Результат поиска">
+    <!-- Основной контент страницы -->
+    <ContentPage.Content>
+        <StackLayout>
+            <!-- Список для отображения отфильтрованных рецептов -->
+            <ListView x:Name="recipesList" ItemsSource="{Binding}" ItemSelected="OnItemSelected">
+                <!-- Определение шаблона отображения каждого элемента списка -->
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <!-- Отображение каждого элемента в виде горизонтального стека -->
+                            <ViewCell.View>
+                                <StackLayout Orientation="Horizontal">
+                                    <!-- Метка для отображения названия блюда -->
+                                    <Label Text="{Binding Name}" FontSize="Medium" HorizontalOptions="StartAndExpand"/>
+                                    <!-- Изображение для отображения картинки блюда -->
+                                    <Image Source="{Binding Image}" HorizontalOptions="End"/>
+                                </StackLayout>
+                            </ViewCell.View>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

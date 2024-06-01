@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FirstAppWithMenu.Views.FiltersPage">
+
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout x:Name="stackLayout" Padding="10">
+                 <!--Search Ingredients Section--> 
+                <Frame CornerRadius="10" HasShadow="True" Margin="10" Padding="5" WidthRequest="200" HeightRequest="40" BackgroundColor="LightGray">
+                    <Entry x:Name="searchEntry" Placeholder="Поиск ингредиентов..." FontSize="18" ClearButtonVisibility="WhileEditing" Keyboard="Default" TextChanged="SearchBar_TextChanged"/>
+                </Frame>
+
+                 <!--Alert Label Section--> 
+                <Frame CornerRadius="10" HasShadow="True" Margin="10" Padding="5" WidthRequest="200" HeightRequest="40" BackgroundColor="WhiteSmoke">
+                    <Label Text="Предполагается, что вода, соль и сахар есть у каждого" FontSize="15"/>
+                </Frame>
+
+                 <!--Ingredients List Section--> 
+                <Frame CornerRadius="10" HasShadow="True" Margin="10" Padding="10" WidthRequest="200" HeightRequest="200">
+                    <ScrollView>
+                        <StackLayout x:Name="ingredientsLayout"/>
+                    </ScrollView>
+                </Frame>
+
+                 <!--Additional Ingredients Button--> 
+                <Frame CornerRadius="5" Padding="5" Margin="5" BackgroundColor="NavajoWhite">
+                    <StackLayout Orientation="Horizontal">
+                        <Switch x:Name="importantSwitchControl" HorizontalOptions="Start" IsToggled="False" Margin="0,0,10,0" />
+                        <Label Text="Рецепты с доп. ингредиентами" FontSize="Medium" VerticalOptions="Center" TextColor="Black"/>
+                    </StackLayout>
+                </Frame>
+
+                 <!--//Filters Button Section--> 
+                <ScrollView>
+                    <StackLayout x:Name="filtersButtonLayout" Spacing="10"/>
+                </ScrollView>
+
+                 <!--Buttons: "Сбросить все" and "Готово"--> 
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Button Text="Сбросить все" BackgroundColor="Orange" TextColor="Black" Margin="10,20,10,10" CornerRadius="5" Clicked="ResetAllButton_Clicked" Grid.Column="0"/>
+                    <Button Text="Готово" BackgroundColor="Orange" TextColor="Black" Margin="10,20,10,10" CornerRadius="5" Clicked="ReadyButton_Clicked" Grid.Column="1"/>
+                </Grid>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+    
+</ContentPage>
