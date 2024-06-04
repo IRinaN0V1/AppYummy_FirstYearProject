@@ -114,10 +114,10 @@ namespace FirstAppWithMenu.Data
             return allIngredients;
         }
 
-        private async Task FillDataBase() //метод заполнения базы данных элементами
+        private async Task FillDataBase() //метод заполнения структуры данных элементами
         {
             CreateTable();
-            // Проверяем, есть ли уже элементы в базе данных
+            // Проверяем, есть ли уже элементы в таблице
             var existingItems = await GetItemsAsync();
             if (existingItems != null && existingItems.Any())
             {
@@ -140,7 +140,7 @@ namespace FirstAppWithMenu.Data
                     if (i == 5) TypeOfMeal = recip[i].Trim(); //тип приема пищи
                     if (i == 6) TypeOfDish = recip[i].Trim(); //тип блюда
                 }
-                //сохраняем новое значение в БД
+                //сохраняем новое значение в таблицу
                 await SaveItemAsync(new Recipe { Name = Name, Image = Image, ListOfIngredients = ListOfIngredients, Ingredients = Ingredients, Text_Of_Recipe = Recip, TypeOfMeal = TypeOfMeal, TypeOfDish = TypeOfDish});
             }
         }
