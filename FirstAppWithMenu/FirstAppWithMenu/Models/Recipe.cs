@@ -6,7 +6,7 @@ using SQLite;
 
 namespace FirstAppWithMenu.Models
 {
-    public class Recipe //класс для работы с базой данных рецептов
+    public class Recipe //класс для работы с таблицей рецептов
     {
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; } //id рецепта
