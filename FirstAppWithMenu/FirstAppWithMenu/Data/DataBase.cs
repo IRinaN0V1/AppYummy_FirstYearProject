@@ -36,12 +36,12 @@ namespace FirstAppWithMenu.Data
             return arr; //возвращаем массив рецептов
         }
 
-        public async Task CreateTable() // Метод для создания таблицы в базе данных
+        public async Task CreateTable() // Метод для создания таблицы 
         {
             await DatabaseWithRecipes.CreateTableAsync<Recipe>();
         }
 
-        public Task<List<Recipe>> GetItemsAsync() //получение всех элементов базы данных
+        public Task<List<Recipe>> GetItemsAsync() //получение всех элементов таблицы
         {
             return DatabaseWithRecipes.Table<Recipe>().ToListAsync();
         }
@@ -51,12 +51,12 @@ namespace FirstAppWithMenu.Data
             return await DatabaseWithRecipes.GetAsync<Recipe>(id);
         }
 
-        public Task<int> DeleteItemAsync(Recipe item) //удаление конкретного элемента из БД
+        public Task<int> DeleteItemAsync(Recipe item) //удаление конкретного элемента из структуры данных
         {
             return DatabaseWithRecipes.DeleteAsync(item);
         }
 
-        public Task<int> SaveItemAsync(Recipe item) //добавление нового элемента БД
+        public Task<int> SaveItemAsync(Recipe item) //добавление нового элемента таблицы
         {
             return DatabaseWithRecipes.InsertAsync(item);
         }
