@@ -26,7 +26,7 @@
                  <!--Additional Ingredients Button--> 
                 <Frame CornerRadius="5" Padding="5" Margin="5" BackgroundColor="NavajoWhite">
                     <StackLayout Orientation="Horizontal">
-                        <Switch x:Name="importantSwitchControl" HorizontalOptions="Start" IsToggled="False" Margin="0,0,10,0" />
+                        <Switch x:Name="additionalIngredientsSwitchControl" HorizontalOptions="Start" IsToggled="False" Margin="0,0,10,0" />
                         <Label Text="Рецепты с доп. ингредиентами" FontSize="Medium" VerticalOptions="Center" TextColor="Black"/>
                     </StackLayout>
                 </Frame>

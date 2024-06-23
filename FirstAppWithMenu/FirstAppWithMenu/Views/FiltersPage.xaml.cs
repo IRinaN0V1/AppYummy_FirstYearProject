@@ -16,7 +16,6 @@ namespace FirstAppWithMenu.Views
         List<string> ingredientsList;
         private List<Switch> mealTypeSwitches; // список свитчей для типов приема пищи
         private List<Switch> dishTypeSwitches; // список свитчей для типов блюд
-        private Switch switchControl;
 
         public FiltersPage()
         {
@@ -24,6 +23,7 @@ namespace FirstAppWithMenu.Views
             Title = "Фильтры";
 
             GetSearchIngredients();
+            searchEntry.TextChanged += SearchBar_TextChanged;
             GetFiltersButton();
         }
 
@@ -46,7 +46,6 @@ namespace FirstAppWithMenu.Views
 
         private List<string> switchNames = new List<string>();
 
-        //private Dictionary<string, bool> switchStates = new Dictionary<string, bool>();
         private List<string> GetSelectedSwitchNames()
         {
             return switchNames;
@@ -106,14 +105,19 @@ namespace FirstAppWithMenu.Views
 
                 switchControl.Toggled += (sender, e) =>
                 {
-                    // Запись названия переключателя в массив строк при изменении его состояния
+                    // Получение названия переключателя путем удаления лишних пробелов
                     string switchName = item.Trim();
+
+                    // Если переключатель включен (IsToggled) и название не содержится в массиве switchNames
                     if (switchControl.IsToggled && !switchNames.Contains(switchName))
                     {
+                        // Добавляем название переключателя в массив switchNames
                         switchNames.Add(switchName);
                     }
+                    // Если переключатель выключен и название содержится в массиве switchNames
                     else if (!switchControl.IsToggled && switchNames.Contains(switchName))
                     {
+                        // Удаляем название переключателя из массива switchNames
                         switchNames.Remove(switchName);
                     }
                 };
@@ -147,10 +151,12 @@ namespace FirstAppWithMenu.Views
 
         private async void GetSearchIngredients()
         {
+            //Получние списка всех ингредиентов из таблицы SQLite
             ingredientsList = await App.Database.GetAllIngredientsAsync();
-            ingredientsList.Sort(); // Сортировка ингредиентов
+            //Сортировка списка ингредиентов
+            ingredientsList.Sort(); 
 
-
+            //Перебор всех полученных ингредиентов
             foreach (var ingredient in ingredientsList)
             {
                 StackLayout ingredientLayout = new StackLayout
@@ -158,20 +164,14 @@ namespace FirstAppWithMenu.Views
                     Orientation = StackOrientation.Horizontal,
                     Children =
                     {
-                    new CheckBox(), // Чекбокс для выбора ингредиента
-                    new Label { Text = ingredient } // Название ингредиента
+                        new CheckBox(), // Создание чекбокса для выбора ингредиента
+                        new Label { Text = ingredient } // Название ингредиента
                     }
                 };
-
-                ingredientsLayout.Children.Add(ingredientLayout); // Добавление макета ингредиента к макету всех ингредиентов
+                // Добавление макета ингредиента к макету всех ингредиентов
+                ingredientsLayout.Children.Add(ingredientLayout); 
             }
-
-            var buttonsStackLayout = new StackLayout
-            {
-                Orientation = StackOrientation.Horizontal
-            };
-            searchEntry.TextChanged += SearchBar_TextChanged;
-        }
+        }//Получение списка ингредиентов для поиска по ним
 
         private Dictionary<string, bool> ingredientSelections = new Dictionary<string, bool>();
 
@@ -245,73 +245,95 @@ namespace FirstAppWithMenu.Views
 
         private async void ResetAllButton_Clicked(object sender, EventArgs e)
         {
+            // Если текстовое поле для поиска не пустое, сбросить его содержимое
             if (!string.IsNullOrEmpty(searchEntry.Text))
             {
                 searchEntry.Text = string.Empty;
             }
-            // Сбросить все галочки
+
+            // Перебираем все дочерние элементы в ingredientsLayout
             foreach (var ingredientLayout in ingredientsLayout.Children)
             {
+                // Проверяем, является ли текущий элемент типом StackLayout
                 if (ingredientLayout is StackLayout stackLayout)
                 {
+                    // Если в StackLayout есть дочерний элемент и это CheckBox
                     if (stackLayout.Children.Count > 0 && stackLayout.Children[0] is CheckBox checkBox)
                     {
+                        // Сбрасываем значение галочки чекбокса
                         checkBox.IsChecked = false;
                     }
                 }
             }
-            importantSwitchControl.IsToggled = false;
+            // Сброс состояния переключателя "Рецепты с доп. ингредиентами"
+            additionalIngredientsSwitchControl.IsToggled = false;
 
+            // Сброс состояния всех переключателей типов блюд (mealTypeSwitches)
             foreach (var mealSwitch in mealTypeSwitches)
             {
                 mealSwitch.IsToggled = false;
             }
 
+            // Сброс состояния всех переключателей типов блюд (dishTypeSwitches)
             foreach (var dishSwitch in dishTypeSwitches)
             {
                 dishSwitch.IsToggled = false;
             }
-        }
+        }//Обработчик нажатия на кнопку "Сбросить все"
 
         private async void ReadyButton_Clicked(object sender, EventArgs e)
         {
+            // Если текстовое поле для поиска не пустое, сбросить его содержимое
             if (!string.IsNullOrEmpty(searchEntry.Text))
             {
                 searchEntry.Text = string.Empty;
             }
 
+            // Сохранить выбранные ингредиенты
             SaveSelectedIngredients();
-            bool isSwitch = importantSwitchControl.IsToggled;
 
+            // Получение текущего состояния переключателя "Рецепты с доп. ингредиентами"
+            bool isSwitch = additionalIngredientsSwitchControl.IsToggled;
+
+            // Получение списка названий выбранных переключателей
             List<string> selectedSwitchNames = GetSelectedSwitchNames();
+
+            // Создание новой страницы FilteredRecipes.
+            // Передача ей выбранных ингредиентов, выбранных переключателей и состояние переключателя "Рецепты с доп. ингредиентами"
             FilteredRecipes filteredRecipePage = new FilteredRecipes(selectedIngredients, selectedSwitchNames, isSwitch);
 
-
+            // Переход на страницу с отфильтрованными рецептами
             await Navigation.PushAsync(filteredRecipePage);
-
         }
 
         private List<string> selectedIngredients = new List<string>();
 
-        //СПИСОК ВЫБРАННЫХ ИНГРЕДИЕНТОВ
         private void SaveSelectedIngredients()
         {
-            selectedIngredients.Clear(); // Очищаем массив для предотвращения дублирования данных
+            // Очистка списка выбранных ингредиентов для предотвращения дублирования данных
+            selectedIngredients.Clear();
 
+            // Перебор всех представленных пользователю ингредиентов
             foreach (var childLayout in ingredientsLayout.Children)
             {
+                // Проверяем, что текущий элемент является StackLayout
                 if (childLayout is StackLayout stackLayout)
                 {
+                    // Находим элемент Label внутри StackLayout
                     var label = stackLayout.Children.OfType<Label>().FirstOrDefault();
+                    // Находим элемент CheckBox внутри StackLayout
                     var checkBox = stackLayout.Children.OfType<CheckBox>().FirstOrDefault();
 
+                    // Проверяем, что элемент Label и CheckBox не равны null и что CheckBox отмечен
                     if (label != null && checkBox != null && checkBox.IsChecked)
                     {
+                        // Получаем название ингредиента из элемента Label
                         string ingredientName = label.Text;
+                        // Добавляем название ингредиента в список выбранных ингредиентов
                         selectedIngredients.Add(ingredientName);
                     }
                 }
             }
-        }
+        }// Формирование списка выбранных ингредиентов
     }
 }

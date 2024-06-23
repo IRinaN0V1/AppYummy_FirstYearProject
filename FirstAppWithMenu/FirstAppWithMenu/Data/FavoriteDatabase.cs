@@ -46,10 +46,12 @@ namespace FirstAppWithMenu.Data
             return database.InsertAsync(item);
         }
 
+
         // Метод для удаления элемента из базы данных
-        public Task<int> DeleteItemAsync(Recipe item)
+        public Task<int> DeleteItemAsync(Recipe recipe)
         {
-            return database.DeleteAsync(item);
+
+            return database.DeleteAsync(recipe);
         }
     }
 }

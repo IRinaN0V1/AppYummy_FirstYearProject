@@ -113,6 +113,7 @@ namespace FirstAppWithMenu.Views
                     {
                         // Создаем новую страницу рецепта с кнопкой "Добавить в избранное"
                         recipePage = new PageOfRecipe();
+
                     }
                     else
                     {
