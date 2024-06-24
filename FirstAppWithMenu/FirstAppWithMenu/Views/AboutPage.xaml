@@ -18,9 +18,9 @@
                      Command="{Binding OpenSettingsCommand}" />
         
     </ContentPage.ToolbarItems>
-    //Содержимое страницы
+    <!--Содержимое страницы-->
     <ContentPage.Content>
-        //Надпись "Что в меню на сегодня?" и ее характеристики
+    <!--надпись "Что в меню на сегодня?"-->
         <StackLayout Padding="10">
             <Label Text="Что в меню на сегодня?" 
                    HorizontalOptions="CenterAndExpand" 
