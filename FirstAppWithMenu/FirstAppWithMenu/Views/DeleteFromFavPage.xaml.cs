@@ -31,7 +31,7 @@ namespace FirstAppWithMenu.Views
         {
             await RemoveFromFavorite();
             await DisplayAlert("", "Рецепт удален из избранного", "Ок");
-        }
+        }//Обработчик события: нажатия на кнопку "Удалить из Избранного"
 
         private async Task RemoveFromFavorite()
         {
@@ -49,7 +49,7 @@ namespace FirstAppWithMenu.Views
                 // Поиск и удаление рецепта из базы данных избранных рецептов
                 await favoriteRecipesDb.DeleteItemAsync(recipe);
             }
-        }
+        }//Метод удаления рецепта из избранного
     }
 
 }
