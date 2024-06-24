@@ -5,6 +5,7 @@
              Title="Избранное">
     <ContentPage.Content>
         <StackLayout>
+            <!--Список избранных рецептов-->
             <ListView x:Name="recipesList" ItemsSource="{Binding}" ItemSelected="OnItemSelected">
                 <ListView.ItemTemplate>
                     <DataTemplate>
