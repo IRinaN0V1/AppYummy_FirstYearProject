@@ -33,7 +33,7 @@ namespace FirstAppWithMenu.Views
             await AddToFavorite();
             await DisplayAlert("", "Рецепт добавлен в избранное", "Ок");
 
-        }
+        }//Обработчик события: нажатие на кнопку "Добавить рецепт в избранное"
 
         private async Task<bool> AddToFavorite()
         {
@@ -54,6 +54,6 @@ namespace FirstAppWithMenu.Views
             }
             
             return false;
-        }
+        }//Метод добавления рецептов в избранное
     }
 }
