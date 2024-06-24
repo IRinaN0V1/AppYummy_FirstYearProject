@@ -6,24 +6,24 @@
     <ContentPage.Content>
         <ScrollView>
             <StackLayout x:Name="stackLayout" Padding="10">
-                 <!--Search Ingredients Section--> 
+                 <!--Строка поиска--> 
                 <Frame CornerRadius="10" HasShadow="True" Margin="10" Padding="5" WidthRequest="200" HeightRequest="40" BackgroundColor="LightGray">
                     <Entry x:Name="searchEntry" Placeholder="Поиск ингредиентов..." FontSize="18" ClearButtonVisibility="WhileEditing" Keyboard="Default" TextChanged="SearchBar_TextChanged"/>
                 </Frame>
 
-                 <!--Alert Label Section--> 
+                 <!--Напоминание--> 
                 <Frame CornerRadius="10" HasShadow="True" Margin="10" Padding="5" WidthRequest="200" HeightRequest="40" BackgroundColor="WhiteSmoke">
                     <Label Text="Предполагается, что вода, соль и сахар есть у каждого" FontSize="15"/>
                 </Frame>
 
-                 <!--Ingredients List Section--> 
+                 <!--Список ингредиентов для поиска--> 
                 <Frame CornerRadius="10" HasShadow="True" Margin="10" Padding="10" WidthRequest="200" HeightRequest="200">
                     <ScrollView>
                         <StackLayout x:Name="ingredientsLayout"/>
                     </ScrollView>
                 </Frame>
 
-                 <!--Additional Ingredients Button--> 
+                 <!--Кнопка "Рецепты с доп. ингредиентами"--> 
                 <Frame CornerRadius="5" Padding="5" Margin="5" BackgroundColor="NavajoWhite">
                     <StackLayout Orientation="Horizontal">
                         <Switch x:Name="additionalIngredientsSwitchControl" HorizontalOptions="Start" IsToggled="False" Margin="0,0,10,0" />
@@ -31,12 +31,12 @@
                     </StackLayout>
                 </Frame>
 
-                 <!--//Filters Button Section--> 
+                 <!--Скролл для кнопок категорий--> 
                 <ScrollView>
                     <StackLayout x:Name="filtersButtonLayout" Spacing="10"/>
                 </ScrollView>
 
-                 <!--Buttons: "Сбросить все" and "Готово"--> 
+                 <!--Кнопки: "Сбросить все" and "Готово"--> 
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
