@@ -12,6 +12,7 @@ namespace FirstAppWithMenu.Views
     {
         public CategoriesButtonPage()
         {
+            //инициализация страницы
             InitializeComponent();
         }
     }
